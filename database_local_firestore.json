@@ -1,0 +1,64 @@
+{
+  "packages": {
+    "plan-basic": {
+      "name": "Basic",
+      "speed": 10,
+      "price": 500,
+      "fup_limit": "Unlimited",
+      "fupLimit": "Unlimited",
+      "mikrotik_profile": "10M_Unlimited",
+      "mikrotikProfile": "10M_Unlimited",
+      "description": "Basic broadband plan for light browsing.",
+      "createdAt": "2026-05-20T01:32:12.308Z",
+      "updatedAt": "2026-05-20T01:32:12.308Z"
+    },
+    "plan-standard": {
+      "name": "Standard",
+      "speed": 20,
+      "price": 800,
+      "fup_limit": "Unlimited",
+      "fupLimit": "Unlimited",
+      "mikrotik_profile": "20M_Unlimited",
+      "mikrotikProfile": "20M_Unlimited",
+      "description": "Standard household plan for streaming.",
+      "createdAt": "2026-05-20T01:32:12.308Z",
+      "updatedAt": "2026-05-20T01:32:12.308Z"
+    },
+    "plan-premium": {
+      "name": "Premium",
+      "speed": 50,
+      "price": 1200,
+      "fup_limit": "Unlimited",
+      "fupLimit": "Unlimited",
+      "mikrotik_profile": "50M_Unlimited",
+      "mikrotikProfile": "50M_Unlimited",
+      "description": "Premium ultra-fast broadband service.",
+      "createdAt": "2026-05-20T01:32:12.308Z",
+      "updatedAt": "2026-05-20T01:32:12.308Z"
+    }
+  },
+  "users": {
+    "user-admin": {
+      "username": "admin",
+      "password": "$2b$10$vUWuw9BwwPEGd5btDBEkK.jXwuWtpLaWqpgo41GjOhkjV.7QdAITi",
+      "name": "System Admin",
+      "phone": "01700000000",
+      "address": "HQ Dhaka",
+      "role": "admin",
+      "status": "Active",
+      "package_id": null,
+      "ip_address": "10.0.0.1",
+      "mac_address": "00:11:22:33:44:55",
+      "pppoe_username": "admin_ppp",
+      "total_due": 0,
+      "expiry_date": "",
+      "created_at": "2026-05-20T01:32:12.308Z",
+      "createdAt": "2026-05-20T01:32:12.308Z",
+      "updated_at": "2026-05-20T01:32:12.308Z"
+    }
+  },
+  "bills": {},
+  "payments": {},
+  "tickets": {},
+  "ticket_replies": {}
+}

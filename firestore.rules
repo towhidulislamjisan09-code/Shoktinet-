@@ -1,0 +1,56 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Default deny catch-all match
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Is valid non-empty string helper
+    function isNonEmptyString(val, maxLen) {
+      return val is string && val.size() > 0 && val.size() <= maxLen;
+    }
+
+    // Helper functions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    // Users Collection Rule Set
+    match /users/{userId} {
+      allow read: if isSignedIn();
+      allow write: if isSignedIn();
+    }
+
+    // Packages Collection Rule Set
+    match /packages/{packageId} {
+      allow read: if isSignedIn();
+      allow write: if isSignedIn();
+    }
+
+    // Bills Collection Rule Set
+    match /bills/{billId} {
+      allow read, write: if isSignedIn();
+    }
+
+    // Payments Collection Rule Set
+    match /payments/{paymentId} {
+      allow read, write: if isSignedIn();
+    }
+
+    // Tickets Collection Rule Set
+    match /tickets/{ticketId} {
+      allow read, write: if isSignedIn();
+    }
+
+    // Ticket Replies Collection Rule Set
+    match /ticket_replies/{replyId} {
+      allow read, write: if isSignedIn();
+    }
+  }
+}

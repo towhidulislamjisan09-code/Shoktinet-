@@ -1,0 +1,130 @@
+{
+  "entities": {
+    "User": {
+      "title": "User Profile",
+      "description": "System accounts and ISP customer details",
+      "type": "object",
+      "properties": {
+        "username": { "type": "string", "description": "Unique username" },
+        "password": { "type": "string", "description": "Hashed password" },
+        "name": { "type": "string", "description": "Full name" },
+        "phone": { "type": "string", "description": "Contact number" },
+        "address": { "type": "string", "description": "Residential address" },
+        "role": { "type": "string", "enum": ["admin", "customer"] },
+        "package_id": { "type": "string", "description": "Assigned package identifier" },
+        "status": { "type": "string", "enum": ["Active", "Suspended"] },
+        "ip_address": { "type": "string" },
+        "mac_address": { "type": "string" },
+        "pppoe_username": { "type": "string" },
+        "total_due": { "type": "number" },
+        "expiry_date": { "type": "string" },
+        "created_at": { "type": "string" },
+        "updated_at": { "type": "string" }
+      },
+      "required": ["username", "password", "name", "phone", "role"]
+    },
+    "Package": {
+      "title": "Service Plan Package",
+      "description": "ISP speed and price plan definitions",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "description": "Package name" },
+        "speed": { "type": "number", "description": "Speed in Mbps" },
+        "price": { "type": "number", "description": "Monthly subscription fee" },
+        "fup_limit": { "type": "string" },
+        "fupLimit": { "type": "string" },
+        "mikrotik_profile": { "type": "string" },
+        "mikrotikProfile": { "type": "string" },
+        "description": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["name", "speed", "price"]
+    },
+    "Bill": {
+      "title": "Bill",
+      "description": "Monthly recurring bill generated for active subscribers",
+      "type": "object",
+      "properties": {
+        "user_id": { "type": "string", "description": "Foreign relation mapping" },
+        "amount": { "type": "number" },
+        "billing_month": { "type": "string" },
+        "due_date": { "type": "string" },
+        "status": { "type": "string", "enum": ["Unpaid", "Paid"] },
+        "created_at": { "type": "string" },
+        "updated_at": { "type": "string" }
+      },
+      "required": ["user_id", "amount", "billing_month", "due_date", "status"]
+    },
+    "Payment": {
+      "title": "Payment Transaction",
+      "description": "Subscriber payment details (bKash, Nagad, etc.)",
+      "type": "object",
+      "properties": {
+        "user_id": { "type": "string" },
+        "bill_id": { "type": "string" },
+        "amount": { "type": "number" },
+        "transaction_id": { "type": "string" },
+        "payment_method": { "type": "string" },
+        "status": { "type": "string", "enum": ["Pending", "Approved", "Rejected"] },
+        "notes": { "type": "string" },
+        "payment_date": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["user_id", "amount", "transaction_id", "payment_method", "status"]
+    },
+    "Ticket": {
+      "title": "Support Ticket",
+      "description": "Support tickets submitted by users",
+      "type": "object",
+      "properties": {
+        "user_id": { "type": "string" },
+        "subject": { "type": "string" },
+        "description": { "type": "string" },
+        "status": { "type": "string", "enum": ["Open", "In Progress", "Closed"] },
+        "priority": { "type": "string", "enum": ["Low", "Medium", "High"] },
+        "created_at": { "type": "string" },
+        "updated_at": { "type": "string" }
+      },
+      "required": ["user_id", "subject", "description", "status"]
+    },
+    "TicketReply": {
+      "title": "Ticket Reply",
+      "description": "Individual replies inside support tickets",
+      "type": "object",
+      "properties": {
+        "ticket_id": { "type": "string" },
+        "user_id": { "type": "string" },
+        "message": { "type": "string" },
+        "created_at": { "type": "string" }
+      },
+      "required": ["ticket_id", "user_id", "message"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profiles collection"
+    },
+    "/packages/{packageId}": {
+      "schema": "Package",
+      "description": "Service plans collection"
+    },
+    "/bills/{billId}": {
+      "schema": "Bill",
+      "description": "Billing collection"
+    },
+    "/payments/{paymentId}": {
+      "schema": "Payment",
+      "description": "Verified payments tracker"
+    },
+    "/tickets/{ticketId}": {
+      "schema": "Ticket",
+      "description": "Tickets collection"
+    },
+    "/ticket_replies/{replyId}": {
+      "schema": "TicketReply",
+      "description": "Replies association collection"
+    }
+  }
+}
